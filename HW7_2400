@@ -1,0 +1,171 @@
+; DEREK HOLSAPPLE
+; 20190318
+; COMPUTER ORGANIZATION II
+
+; HOMEWORK #7
+
+; This is a program to encrypt and decrypt a message
+; The message will be a 4, 32 bit DCD hex number
+; The message is equivalent to a ASCII "CROW", "BIRD", "EATS", and "SEED"
+; To encrypt, the message will first be scrambled and then the key will be applied
+; To decrypt, the message will apply the key first and then be unscrambled
+; After the message has been decrypted it will be compared to the original message
+
+; **********************************************************************************
+; Load Data
+
+
+	ADR		r1, Key      		; Address of the crypto Key 
+	LDR		r1, [r1]			; Load the crypto Key into r1
+	
+;Create a jump table for the DCD adrresses
+AddressLoader
+
+	ADD r6, r6, #1 			; Count from 1, 2, 3, 4 to load data
+	CMP r6, #5     				; Compare to see if the counter is at 5
+	BEQ TheEnd 				; If the counter reference is 5 then end the program
+
+	; Use a jump table to load address
+	ADR r3, DCD_Data
+	ADD r3, r3, r6, LSL #2 	; Use the counter reference to step through the table
+	MOV pc, r3
+
+TheEnd  End
+	
+; **********************************************************************************
+Alice
+; Prep Data to be sent "Alice"
+
+	EOR r12, r12, r1  				; Use the Key to encrypt the data
+
+	MOV r5, #2						; set r5 to 2 to reference jump table
+	ADR r3, JumpTableEncrypt 	; Load the address into r3
+	ADD r3, r3, r5, LSL #2       		; Reference the second element in the jump
+	MOV pc, r3							; Move PC to jump table reference
+
+; **********************************************************************************
+BOB
+; Data is ready to be recieved "Bob"
+
+	EOR r12, r12, r1   				; Use the Key to decrypt the data
+	
+	MOV r5, #2						; set r5 to 2 to reference jump table
+	ADR r3, JumpTableDecrypt	; Load the address into r3
+	ADD r3, r3, r5, LSL #2       		; Reference the second element in the jump
+	MOV pc, r3							; Move PC to jump table reference
+
+
+; **********************************************************************************
+; Compare the generated number versus the original number 
+; "What Alice passed to Bob"
+
+Compare
+	EORS r11, r12, r0 		; Compare generated message by original message
+	BNE AddressLoader 		; Branch if the message is corrupt
+	BEQ AddressLoader 	; Branch if the messages are the same 
+
+
+; **********************************************************************************
+
+;JUMP TABLES
+
+; **********************************************************************************
+; Alice Jump Table to encrypt
+JumpTableEncrypt
+	B		Case0
+	B		Case1
+	B		Case2
+	B		Case3
+
+Case0
+	ROR r12, r12, #4       ; Scramble data by rotating right by 4
+	B		BOB        			  ; Return back to the main method
+Case1
+	ROR r12, r12, #8       ; Scramble data by rotating right by 8
+	B		BOB        			  ; Return back to the main method
+Case2
+	ROR r12, r12, #12     ; Scramble data by rotating right by 12
+	B		BOB      			  ; Return back to the main method
+Case3
+	ROR r12, r12, #16     ; Scramble data by rotating right by 16
+	B		BOB           		  ; Return back to the main method
+
+
+; **********************************************************************************
+; Bob's Jump table to decrypt
+JumpTableDecrypt
+
+ 	B		Case5
+ 	B		Case6
+ 	B		Case7
+ 	B 		Case8
+
+Case5
+	ROR r12, r12, #28     ; Scramble data by rotating right by 28
+	B Compare  	            ; Return back to the main method
+Case6
+	ROR r12, r12, #24     ; Scramble data by rotating right by 8
+	B Compare           	  ; Return back to the main method
+Case7
+	ROR r12, r12, #20     ; Scramble data by rotating right by 12
+	B Compare            	  ; Return back to the main method
+Case8
+	ROR r12, r12, #16     ; Scramble data by rotating right by 16
+	B Compare            	  ; Return back to the main method
+
+
+; **********************************************************************************
+; Address Jump table to load DCD values
+DCD_Data
+
+	B 		address1
+	B 		address2
+	B		address3
+	B 		address4
+
+address1
+	ADR		r0, Message1   ; Address of the message to be passed
+	LDR		r0, [r0]			; Load the message into register 0
+	MOV      r12, r0			; Create a copy of the data to encrypt
+	B			Alice         		; Return back to the main method
+address2 
+	ADR		r0, Message2   ; Address of the message to be passed
+	LDR		r0, [r0]			; Load the message into register 0
+	MOV      r12, r0			; Create a copy of the data to encrypt
+	B			Alice         		; Return back to the main method
+address3	
+	ADR		r0, Message3   ; Address of the message to be passed
+	LDR		r0, [r0]			; Load the message into register 0
+	MOV      r12, r0			; Create a copy of the data to encrypt
+	B			Alice         		; Return back to the main method
+address4
+	ADR		r0, Message4   ; Address of the message to be passed
+	LDR		r0, [r0]			; Load the message into register 0
+	MOV      r12, r0			; Create a copy of the data to encrypt
+	B			Alice         		; Return back to the main method
+
+; **********************************************************************************
+;DATA
+; **********************************************************************************
+
+; ASCII = CROW
+Message1       DCD		0x43524F57
+; ASCII = BIRD
+Message2	    DCD		0x42495244
+; ASCII = EATS
+Message3	    DCD		0x45415453
+; ASCII = SEED
+Message4	    DCD		0x53454544
+
+; Key for encryption and decryption
+Key             DCD         0b10101010101010101010101010101010 
+
+
+
+
+
+
+
+
+
+

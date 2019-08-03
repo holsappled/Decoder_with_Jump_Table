@@ -79,16 +79,16 @@ JumpTableEncrypt
 
 Case0
 	ROR r12, r12, #4       				; Scramble data by rotating right by 4
-	B		BOB        			; Return back to the main method
+	B  BOB        					; Return back to the main method
 Case1
 	ROR r12, r12, #8       				; Scramble data by rotating right by 8
-	B		BOB        			; Return back to the main method
+	B  BOB        					; Return back to the main method
 Case2
 	ROR r12, r12, #12     				; Scramble data by rotating right by 12
-	B		BOB      			; Return back to the main method
+	B  BOB      					; Return back to the main method
 Case3
 	ROR r12, r12, #16     				; Scramble data by rotating right by 16
-	B		BOB           		  	; Return back to the main method
+	B  BOB           		  		; Return back to the main method
 
 
 ; **********************************************************************************
@@ -149,7 +149,7 @@ address4
 ; **********************************************************************************
 
 ; ASCII = CROW
-Message1       DCD		0x43524F57
+Message1       	    DCD		0x43524F57
 ; ASCII = BIRD
 Message2	    DCD		0x42495244
 ; ASCII = EATS

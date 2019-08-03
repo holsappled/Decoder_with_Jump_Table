@@ -29,11 +29,11 @@ After return from the rotation subroutine perform XOR with the key.
 3.	The structure of the program is a student’s choice but jump table technique is required to be implemented. Here is one exemplary structure:
 
 
-•	Select a message, 16 symbols and declare it by DCD in 4 words.
-•	Select a 32-bit key.
-•	The main subroutine calls in a sequence the encryption subroutine, the decryption subroutine and the compare subroutine.
-•	The encryption subroutine makes word after word first some rotation using jump table to the case subroutines: case 0 is to rotate ROR 4, case 2 - rotate ROR 8, case 3 - ROR 12, case 4 - ROR 16. After return from rotation every word is XOR-ed with the key and generates the encrypted message. The encryption subroutine should not destroy the original message.
+-	Select a message, 16 symbols and declare it by DCD in 4 words.
+-	Select a 32-bit key.
+-	The main subroutine calls in a sequence the encryption subroutine, the decryption subroutine and the compare subroutine.
+-	The encryption subroutine makes word after word first some rotation using jump table to the case subroutines: case 0 is to rotate ROR 4, case 2 - rotate ROR 8, case 3 - ROR 12, case 4 - ROR 16. After return from rotation every word is XOR-ed with the key and generates the encrypted message. The encryption subroutine should not destroy the original message.
 The decoding follows the reversed sequence. 
-•	The decryption subroutine for every word of the encrypted message makes first XOR with the key and after that backward rotation (estimate the number of RORs). As a result, generates the decrypted message. 
-•	The comparison subroutine compares the original and decrypted messages. 
+-	The decryption subroutine for every word of the encrypted message makes first XOR with the key and after that backward rotation (estimate the number of RORs). As a result, generates the decrypted message. 
+-	The comparison subroutine compares the original and decrypted messages. 
 

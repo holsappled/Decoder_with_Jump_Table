@@ -126,23 +126,23 @@ DCD_Data
 address1
 	ADR		r0, Message1   		; Address of the message to be passed
 	LDR		r0, [r0]		; Load the message into register 0
-	MOV      r12, r0			; Create a copy of the data to encrypt
-	B			Alice         	; Return back to the main method
+	MOV      	r12, r0			; Create a copy of the data to encrypt
+	B		Alice         		; Return back to the main method
 address2 
 	ADR		r0, Message2   		; Address of the message to be passed
 	LDR		r0, [r0]		; Load the message into register 0
-	MOV      r12, r0			; Create a copy of the data to encrypt
-	B			Alice         	; Return back to the main method
+	MOV      	r12, r0			; Create a copy of the data to encrypt
+	B		Alice      	   	; Return back to the main method
 address3	
 	ADR		r0, Message3   		; Address of the message to be passed
 	LDR		r0, [r0]		; Load the message into register 0
-	MOV      r12, r0			; Create a copy of the data to encrypt
-	B			Alice         	; Return back to the main method
+	MOV      	r12, r0			; Create a copy of the data to encrypt
+	B		Alice     	    	; Return back to the main method
 address4
 	ADR		r0, Message4   		; Address of the message to be passed
 	LDR		r0, [r0]		; Load the message into register 0
-	MOV      r12, r0			; Create a copy of the data to encrypt
-	B			Alice         	; Return back to the main method
+	MOV      	r12, r0			; Create a copy of the data to encrypt
+	B		Alice        	 	; Return back to the main method
 
 ; **********************************************************************************
 ;DATA

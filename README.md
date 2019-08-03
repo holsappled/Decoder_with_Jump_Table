@@ -1,4 +1,4 @@
-# Decoder_with_Jump_Table ASSEMBLY LANQUAGE
+# Decoder_with_Jump_Table ASSEMBLY LANGUAGE
 Using the simulator "Visual" to represent Assembly Language Programming.  Created a basic decoder to pass a message with a jump table
 
 

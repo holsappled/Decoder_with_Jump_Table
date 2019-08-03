@@ -4,13 +4,13 @@ Using the simulator "Visual" to represent Assembly Language Programming.  Create
 
 **HW7 – Assembly Language Programming – due date April 2nd (sent by email)**
 
-**1.	The objective of the assignment is to practice the Jump (branch) table technology, that is used as a programming decoder (like switch in high-level programming languages) to call a subroutine from a significand list of subroutines. See the Jump.s code, which is accompanying this assignment. 
+1.	The objective of the assignment is to practice the Jump (branch) table technology, that is used as a programming decoder (like switch in high-level programming languages) to call a subroutine from a significand list of subroutines. See the Jump.s code, which is accompanying this assignment. 
 
 
        The program must implement light weight symmetric cryptography based on XOR operations and permutations. In symmetric cryptography both partners (two application programs Alice and Bob) share a secret key, which is just a binary sequence. Alice uses the key to encrypt a message and sends the encrypted message to Bob. Bob receives the message and uses the same key to decrypt the message.
  
  
-**2.	Short description of the program functions:
+2.	Short description of the program functions:
 
 	A message is given in four words with packed ASCII symbols (4 symbols in every word). Every word (4 ASCII symbols) is encrypted by word rotation (depends on the key) and bitwise XOR operation with a 32-bit key.  As a result, the message is encrypted. 
 	
@@ -26,7 +26,7 @@ After return from the rotation subroutine perform XOR with the key.
 	The decryption process (bitwise XOR with the key and backward rotation) is performed again over every word, which produces the decrypted message. 
 	At the end, the program compares in a separate subroutine the original and the decrypted message to check the correctness of the encryption algorithm.  
 
-**3.	The structure of the program is a student’s choice but jump table technique is required to be implemented. Here is one exemplary structure:
+3.	The structure of the program is a student’s choice but jump table technique is required to be implemented. Here is one exemplary structure:
 
 
 •	Select a message, 16 symbols and declare it by DCD in 4 words.
